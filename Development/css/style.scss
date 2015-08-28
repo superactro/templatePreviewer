@@ -1,0 +1,213 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+$navColor: rgba(255, 255, 255, 0.9);
+$textColor: #4d4d4d;
+$tooltipBg: #fff;
+$shadowColor: rgba(0,0,0,0.3);
+$blue: rgb(9, 108, 202);
+
+body {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	font-size: 13px;
+	font-family: 'Raleway', sans-serif;
+}
+a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+nav {
+  display: none;
+	box-shadow: 0 3px 4px $shadowColor;
+	background: $navColor url(../img/topline.png) no-repeat center top !important;
+	position: fixed;
+	width: 700px;
+	height: 60px;
+	background: $navColor;
+	bottom: 15px;
+	z-index: 2;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	color: $textColor;
+  	#description {
+		  text-align: left;
+			top: 12px;
+		  margin-left: 200px;
+		  float: left;
+		  position: relative;
+  	}
+	  .layout {
+      text-transform: uppercase;
+		  top: 12px;
+		  position: absolute;
+		  right: 123px;
+	  }
+}
+#logo {
+	top: 14px;
+	position: absolute;
+	left: 16px;
+	width: 20%;
+}
+#prev, #next {
+	position: absolute;
+	top: 10px;
+	width: 42px;
+	height: 42px;
+	opacity: .5;
+	&:hover {
+		opacity: .9;
+	} 
+}
+.no-hover {
+  &:hover {
+		opacity: .5;
+	} 
+}
+#next {
+	right: 5px;
+}
+#prev {
+	right: 50px;	
+}
+#toggle {
+	overflow: hidden;
+    box-shadow: 0 -1px 2px $shadowColor;
+    top: -25px;
+    left: 50%;
+    margin-left: -15px;
+    background: $blue;
+    width: 30px;
+    height: 25px;
+    position: absolute;
+	&:hover {
+		opacity: 1;
+	} 
+	img {
+		position: relative;
+		top: 8px;
+		left: 9px;
+		-webkit-transition-duration: 0.3s;
+		-moz-transition-duration: 0.3s;
+		-o-transition-duration: 0.3s;
+		transition-duration: 0.3s;
+		-webkit-transition-property: -webkit-transform;
+		-moz-transition-property: -moz-transform;
+		-o-transition-property: -o-transform;
+		transition-property: transform;
+	}
+}
+
+// animation
+.animated.bounceIn,
+.animated.bounceOut {
+  -webkit-animation-duration: .95s;
+  animation-duration: .95s;
+}
+@-webkit-keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(.9, .9, .9);
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    -webkit-transform: scale3d(.97, .97, .97);
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    -webkit-transform: scale3d(.9, .9, .9);
+    transform: scale3d(.9, .9, .9);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    -webkit-transform: scale3d(.97, .97, .97);
+    transform: scale3d(.97, .97, .97);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+.bounceIn {
+  -webkit-animation-name: bounceIn;
+  animation-name: bounceIn;
+}
+.tooltip {
+  display: none;
+  box-shadow: 0 2px 2px $shadowColor;
+  width: 180px;
+  height: 60px;
+  position: absolute;
+  right: -122px;
+  bottom: 50px;
+  border-radius: 5px;
+  background: $tooltipBg;
+  p {
+    padding: 3px 30px;
+  }
+  img {
+    position: absolute;
+    bottom: -8px;
+    left: 4px;
+  }
+}
+#loading {
+  padding-top: 20%;
+  text-align: center;
+  z-index: 9999;
+  background: $tooltipBg;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
