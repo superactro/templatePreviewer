@@ -11,14 +11,14 @@ $(window).load(function () {
             tooltip = $('.tooltip'),
             currBg = 0,
             loading = $('#loading'),
-            dir = "../layouts/";
-      
+            dir = '../' + window.location.pathname + "/layouts/";
+            
       // set description to page title
       description.text($(document).attr('title'));
-      
+      console.log('sas');
       // listen for events 
       document.onkeydown = checkKey;
-      
+
       function checkKey(e) {
             e = e || window.event;
             if (e.keyCode == '37') switchPrev();
@@ -74,27 +74,30 @@ $(window).load(function () {
 
       var fileextension = ".jpg";
       // add the images from the layouts dir to array
-      $.ajax({
-            url: dir,
-            success: function (data) {
-                  $(data).find("a:contains(" + fileextension + ")").each(function () {
-                        var filename = this.href.replace(window.location.host, "").replace("http:///", "");
-                        imgArray.push(filename);
-                  });
-
-                  var hash = window.location.hash;
-                  if (hash === '') setBackground(0);
-                  else setBgToCurrHash(hash, imgArray);
-                  
-                  // check and set current hash url
-                  function setBgToCurrHash(hash, imgArray) {
-
-                        var hashID = $.inArray(hash.substring(1, hash.length) + '.jpg', imgArray);
-
-                        setBackground(hashID, true);
-                  }
-            }
+      
+      
+      $('#urls').children().each(function () {
+            preload(dir + $(this).text());
+            var filename = $(this).text();
+            imgArray.push(filename);
       });
+
+
+      var hash = window.location.hash;
+      if (hash === '') setBackground(0);
+      else setBgToCurrHash(hash, imgArray);
+                       
+      // check and set current hash url
+      function setBgToCurrHash(hash, imgArray) {
+
+            var hashID = $.inArray(hash.substring(1, hash.length) + '.jpg', imgArray);
+
+            setBackground(hashID, true);
+      }
+
+
+
+
 
       function setBackground(id, autoTrigger) {
             if (imgArray.length == 1) {
@@ -108,6 +111,8 @@ $(window).load(function () {
                         }, 4000);
                   }
             }
+
+            console.log(imgArray[id]);
             var bgUrl = imgArray[id];
             var layoutText = bgUrl.substring(0, bgUrl.length - 4);
             window.location.hash = layoutText;
@@ -115,14 +120,13 @@ $(window).load(function () {
             nav.append('<p class="layout animated bounceIn">layout_01a</p>');
             $('.layout').text(layoutText);
 
-            $('<img src="../layouts/' + bgUrl + '"/>').load(function () {
+            $('<img src="' + dir + bgUrl + '"/>').load(function () {
                   $('body').css({ 'height': this.height + 'px', });
             }).load(function () {
                   loading.fadeOut(100);
                   nav.show(100);
-
             });
-            $('body').css({ 'background': '#fff url(../layouts/' + bgUrl + ') no-repeat center top' });
+            $('body').css({ 'background': '#fff url(' + dir + bgUrl + ') no-repeat center top' });
       }
 
       // Rotate arrow icon
@@ -131,5 +135,10 @@ $(window).load(function () {
             rotate_factor += 1;
             var rotate_angle = (180 * rotate_factor) % 360;
             $(e).rotate({ angle: rotate_angle });
+      }
+      
+      // Preload images
+      function preload(img) {
+            $('<img/>')[0].src = img;
       }
 });
