@@ -11,11 +11,11 @@ $(window).load(function () {
             tooltip = $('.tooltip'),
             currBg = 0,
             loading = $('#loading'),
-            dir = '../' + window.location.pathname + "/layouts/";
+            //dir = '../' + window.location.pathname + "/layouts/";
+            dir = location.protocol + '//' + location.host + location.pathname + "layouts/";
             
       // set description to page title
       description.text($(document).attr('title'));
-      console.log('sas');
       // listen for events 
       document.onkeydown = checkKey;
 
@@ -38,7 +38,6 @@ $(window).load(function () {
                   nav.stop().animate({ "bottom": "-60px", }, 300);
                   toogle.addClass('hidden');
             }
-
             if (toogle.find('img').css("transform") == 'none') {
                   toogle.find('img').css("transform", "rotate(180deg)");
             } else {
@@ -71,11 +70,6 @@ $(window).load(function () {
                   setBackground(currBg);
             }
       }
-
-      var fileextension = ".jpg";
-      // add the images from the layouts dir to array
-      
-      
       $('#urls').children().each(function () {
             preload(dir + $(this).text());
             var filename = $(this).text();
@@ -91,15 +85,12 @@ $(window).load(function () {
       function setBgToCurrHash(hash, imgArray) {
 
             var hashID = $.inArray(hash.substring(1, hash.length) + '.jpg', imgArray);
-
             setBackground(hashID, true);
       }
 
-
-
-
-
       function setBackground(id, autoTrigger) {
+            currBg = id;
+            console.log(currBg);
             if (imgArray.length == 1) {
                   $('#prev, #next').css({
                         'opacity': '.1'
@@ -112,7 +103,6 @@ $(window).load(function () {
                   }
             }
 
-            console.log(imgArray[id]);
             var bgUrl = imgArray[id];
             var layoutText = bgUrl.substring(0, bgUrl.length - 4);
             window.location.hash = layoutText;
