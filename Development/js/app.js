@@ -12,7 +12,8 @@ $(window).load(function () {
             currBg = 0,
             loading = $('#loading'),
             //dir = '../' + window.location.pathname + "/layouts/";
-            dir = location.protocol + '//' + location.host + location.pathname + "layouts/";
+            dir = location.protocol + '//' + location.host + location.pathname + "layouts/",
+            body = $("html, body");
             
       // set description to page title
       description.text($(document).attr('title'));
@@ -50,6 +51,7 @@ $(window).load(function () {
       prev.click(function () { switchPrev(); return false; });
 
       function switchNext() {
+            scrollTop();
             if (currBg < (imgArray.length - 1)) {
                   currBg++;
                   setBackground(currBg);
@@ -61,6 +63,7 @@ $(window).load(function () {
       }
 
       function switchPrev() {
+            scrollTop();
             if (currBg > 0) {
                   currBg--;
                   setBackground(currBg);
@@ -69,6 +72,9 @@ $(window).load(function () {
                   currBg = imgArray.length - 1;
                   setBackground(currBg);
             }
+      }
+      function scrollTop() {
+            body.stop().animate({ scrollTop: 0 }, 350);
       }
       $('#urls').children().each(function () {
             preload(dir + $(this).text());

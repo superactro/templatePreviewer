@@ -19,6 +19,7 @@ header("Pragma: no-cache");
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta content="Homepage Helden" name="author">
     <link href="css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
